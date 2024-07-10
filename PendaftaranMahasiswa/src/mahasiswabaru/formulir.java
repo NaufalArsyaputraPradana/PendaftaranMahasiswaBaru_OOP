@@ -4,20 +4,23 @@
  */
 package mahasiswabaru;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import static mahasiswabaru.Admin.DB_URL;
-import static mahasiswabaru.Admin.JDBC_DRIVER;
-import static mahasiswabaru.Admin.PASS;
-import static mahasiswabaru.Admin.USER;
-import static mahasiswabaru.Admin.conn;
-import static mahasiswabaru.Admin.stmt;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Naufal Arsyaputra Pradana
  */
 public class Formulir extends javax.swing.JFrame {
+
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/mahasiswabaru";
+    static final String USER = "root";
+    static final String PASS = "";
+
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
 
     /**
      * Creates new form formulir
@@ -279,7 +282,7 @@ public class Formulir extends javax.swing.JFrame {
         return txtProdi.getText().trim();
     }
 
-    public String Asal() {
+    public String getAsal() {
         return txtAsal.getText().trim();
     }
 
