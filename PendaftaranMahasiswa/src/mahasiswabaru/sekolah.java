@@ -8,12 +8,12 @@ package mahasiswabaru;
  *
  * @author HP
  */
-public class sekolah extends javax.swing.JFrame {
+public class Sekolah extends javax.swing.JFrame {
 
     /**
      * Creates new form sekolah
      */
-    public sekolah() {
+    public Sekolah() {
         initComponents();
     }
 

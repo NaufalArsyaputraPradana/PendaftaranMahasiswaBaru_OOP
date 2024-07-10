@@ -4,16 +4,25 @@
  */
 package mahasiswabaru;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import static mahasiswabaru.Barang.DB_URL;
+import static mahasiswabaru.Barang.JDBC_DRIVER;
+import static mahasiswabaru.Barang.PASS;
+import static mahasiswabaru.Barang.USER;
+import static mahasiswabaru.Barang.conn;
+import static mahasiswabaru.Barang.stmt;
+
 /**
  *
- * @author HP
+ * @author Naufal Arsyaputra Pradana
  */
-public class formulir extends javax.swing.JFrame {
+public class Formulir extends javax.swing.JFrame {
 
     /**
      * Creates new form formulir
      */
-    public formulir() {
+    public Formulir() {
         initComponents();
     }
 
@@ -57,13 +66,17 @@ public class formulir extends javax.swing.JFrame {
             }
         });
 
-        txtNama.setText("jTextField1");
+        txtNama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaActionPerformed(evt);
+            }
+        });
 
-        txtNisn.setText("jTextField2");
-
-        txtProdi.setText("jTextField3");
-
-        txtAsal.setText("jTextField4");
+        txtProdi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProdiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +105,7 @@ public class formulir extends javax.swing.JFrame {
                                 .addComponent(asal))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtProdi)
+                                .addComponent(txtProdi, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                                 .addComponent(txtAsal)))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -127,12 +140,81 @@ public class formulir extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        String nama = txtNama.getText().toString().trim();
+        int nisn = Integer.parseInt(txtNisn.getText());
+        String minat = txtProdi.getText();
+        String asal = txtAsal.getText();
+        insert(nama, nisn, minat, asal);
+        clear();
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaActionPerformed
+
+    private void txtProdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdiActionPerformed
+
+    public void insert(String nama, int nisn, String minat, String asal) {
+        try {
+            Class.forName(JDBC_DRIVER);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement();
+
+            String sql = "INSERT INTO mhs (nama, nisn, prodi, asal) VALUES (?,?,?,?)";
+
+            PreparedStatement pms = conn.prepareStatement(sql);
+            pms.setString(1, nama);
+            pms.setInt(2, nisn);
+            pms.setString(3, minat);
+            pms.setString(4, asal);
+
+            pms.execute();
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clear() {
+        // TODO add your handling code here:
+        txtNama.setText("");
+        txtNisn.setText("");
+        txtProdi.setText("");
+        txtAsal.setText("");
+    }
+
+    public String getNama() {
+        return txtNama.getText().trim();
+    }
+
+    public int getNisn() {
+        try {
+            return Integer.parseInt(txtNisn.getText().trim());
+        } catch (NumberFormatException e) {
+            // Handle jika input tidak valid (misalnya tidak bisa di-parse ke int)
+            e.printStackTrace();
+            return 0; // Nilai default atau penanganan lainnya sesuai kebutuhan
+        }
+    }
+
+    public String getProdi() {
+        return txtProdi.getText().trim();
+    }
+
+    public String Asal() {
+        return txtAsal.getText().trim();
+    }
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel asal;

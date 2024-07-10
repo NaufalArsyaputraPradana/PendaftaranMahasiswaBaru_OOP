@@ -4,17 +4,40 @@
  */
 package mahasiswabaru;
 
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+
+import mahasiswabaru.Formulir;
+
 /**
  *
- * @author HP
+ * @author Naufal Arsyaputra Pradana
  */
-public class mahasiswa extends javax.swing.JFrame {
+public class Mahasiswa extends javax.swing.JFrame {
+
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/mahasiswabaru";
+    static final String USER = "root";
+    static final String PASS = "";
+
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
+
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtNisn;
+    private Formulir data;
 
     /**
      * Creates new form mahasiswa
      */
-    public mahasiswa() {
+    public Mahasiswa() {
         initComponents();
+
+        data = new Formulir();
+
+        txtNama.setText(data.getNama());
+        txtNisn.setText(String.valueOf(data.getNisn()));
     }
 
     /**
@@ -29,10 +52,7 @@ public class mahasiswa extends javax.swing.JFrame {
         judul = new javax.swing.JLabel();
         tabel = new javax.swing.JScrollPane();
         tblMhs = new javax.swing.JTable();
-        btnTambah = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        btnKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,31 +82,10 @@ public class mahasiswa extends javax.swing.JFrame {
         });
         tabel.setViewportView(tblMhs);
 
-        btnTambah.setText("Tambah");
-        btnTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahActionPerformed(evt);
-            }
-        });
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
         btnHapus.setText("Hapus");
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusActionPerformed(evt);
-            }
-        });
-
-        btnKeluar.setText("Keluar");
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
             }
         });
 
@@ -98,34 +97,22 @@ public class mahasiswa extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(judul)
-                        .addGap(253, 253, 253))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(btnTambah)
-                .addGap(85, 85, 85)
-                .addComponent(btnEdit)
-                .addGap(92, 92, 92)
-                .addComponent(btnHapus)
-                .addGap(78, 78, 78)
-                .addComponent(btnKeluar)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(253, 253, 253))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnHapus)
+                            .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(judul)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTambah)
-                    .addComponent(btnEdit)
-                    .addComponent(btnHapus)
-                    .addComponent(btnKeluar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btnHapus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -135,38 +122,85 @@ public class mahasiswa extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
+
+        String nama = data.getNama().toString().trim();
+
+        try {
+            Class.forName(JDBC_DRIVER);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement();
+
+            String sql = "DELETE FROM mhs WHERE id_mhs=?";
+
+            PreparedStatement pms = conn.prepareStatement(sql);
+            pms.setString(1, nama);
+
+            pms.execute();
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        showtable();
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnKeluarActionPerformed
-
-    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTambahActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
+        showtable();
     }//GEN-LAST:event_formWindowOpened
 
     private void tblMhsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMhsMouseClicked
         // TODO add your handling code here:
+        getData();
     }//GEN-LAST:event_tblMhsMouseClicked
+
+    public void getData() {
+        int baris = tblMhs.getSelectedRow();
+        txtNama.setText(String.valueOf(tblMhs.getValueAt(baris, 1)));
+        txtNisn.setText(String.valueOf(tblMhs.getValueAt(baris, 2)));
+    }
+
+    public void showtable() {
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Nama");
+            model.addColumn("NISN");
+
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM mhs";
+            int i = 1;
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    i,
+                    rs.getString("id_mhs"),
+                    rs.getString("nama"),
+                    rs.getString("nisn"),});
+                i++;
+            }
+            rs.close();
+            conn.close();
+            stmt.close();
+
+            tblMhs.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btnKeluar;
-    private javax.swing.JButton btnTambah;
     private javax.swing.JLabel judul;
     private javax.swing.JScrollPane tabel;
     private javax.swing.JTable tblMhs;

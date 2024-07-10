@@ -8,12 +8,12 @@ package mahasiswabaru;
  *
  * @author HP
  */
-public class prodi extends javax.swing.JFrame {
+public class Prodi extends javax.swing.JFrame {
 
     /**
      * Creates new form prodi
      */
-    public prodi() {
+    public Prodi() {
         initComponents();
     }
 
