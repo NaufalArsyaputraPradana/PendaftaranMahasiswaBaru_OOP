@@ -6,12 +6,12 @@ package mahasiswabaru;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import static mahasiswabaru.Barang.DB_URL;
-import static mahasiswabaru.Barang.JDBC_DRIVER;
-import static mahasiswabaru.Barang.PASS;
-import static mahasiswabaru.Barang.USER;
-import static mahasiswabaru.Barang.conn;
-import static mahasiswabaru.Barang.stmt;
+import static mahasiswabaru.Admin.DB_URL;
+import static mahasiswabaru.Admin.JDBC_DRIVER;
+import static mahasiswabaru.Admin.PASS;
+import static mahasiswabaru.Admin.USER;
+import static mahasiswabaru.Admin.conn;
+import static mahasiswabaru.Admin.stmt;
 
 /**
  *
@@ -45,6 +45,13 @@ public class Formulir extends javax.swing.JFrame {
         txtNisn = new javax.swing.JTextField();
         txtProdi = new javax.swing.JTextField();
         txtAsal = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        keluar = new javax.swing.JMenuItem();
+        tabel = new javax.swing.JMenu();
+        mahasiswa = new javax.swing.JMenuItem();
+        asal1 = new javax.swing.JMenuItem();
+        prodi1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,43 +85,87 @@ public class Formulir extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Menu");
+
+        keluar.setText("Keluar");
+        keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keluarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(keluar);
+
+        jMenuBar1.add(jMenu1);
+
+        tabel.setText("Tabel");
+
+        mahasiswa.setText("Mahasiswa Baru");
+        mahasiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mahasiswaActionPerformed(evt);
+            }
+        });
+        tabel.add(mahasiswa);
+
+        asal1.setText("Asal Sekolah");
+        asal1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asal1ActionPerformed(evt);
+            }
+        });
+        tabel.add(asal1);
+
+        prodi1.setText("Prodi Minat");
+        prodi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prodi1ActionPerformed(evt);
+            }
+        });
+        tabel.add(prodi1);
+
+        jMenuBar1.add(tabel);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(288, 288, 288)
+                .addComponent(btnSubmit)
+                .addGap(0, 287, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(judul)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(185, 185, 185))
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSubmit)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nama)
-                                .addComponent(nisn))
-                            .addGap(96, 96, 96)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNisn, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                .addComponent(txtNama)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(prodi)
-                                .addComponent(asal))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtProdi, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                .addComponent(txtAsal)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(156, 156, 156)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nama)
+                            .addComponent(nisn))
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNisn)
+                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prodi)
+                            .addComponent(asal))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtProdi)
+                            .addComponent(txtAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(14, 14, 14)
                 .addComponent(judul)
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nama)
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,7 +183,7 @@ public class Formulir extends javax.swing.JFrame {
                     .addComponent(asal))
                 .addGap(26, 26, 26)
                 .addComponent(btnSubmit)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,6 +206,26 @@ public class Formulir extends javax.swing.JFrame {
     private void txtProdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProdiActionPerformed
+
+    private void keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_keluarActionPerformed
+
+    private void mahasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mahasiswaActionPerformed
+        // TODO add your handling code here:
+        new Mahasiswa().setVisible(true);
+    }//GEN-LAST:event_mahasiswaActionPerformed
+
+    private void asal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asal1ActionPerformed
+        // TODO add your handling code here:
+        new Sekolah().setVisible(true);
+    }//GEN-LAST:event_asal1ActionPerformed
+
+    private void prodi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodi1ActionPerformed
+        // TODO add your handling code here:
+        new Prodi().setVisible(true);
+    }//GEN-LAST:event_prodi1ActionPerformed
 
     public void insert(String nama, int nisn, String minat, String asal) {
         try {
@@ -218,11 +289,18 @@ public class Formulir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel asal;
+    private javax.swing.JMenuItem asal1;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel judul;
+    private javax.swing.JMenuItem keluar;
+    private javax.swing.JMenuItem mahasiswa;
     private javax.swing.JLabel nama;
     private javax.swing.JLabel nisn;
     private javax.swing.JLabel prodi;
+    private javax.swing.JMenuItem prodi1;
+    private javax.swing.JMenu tabel;
     private javax.swing.JTextField txtAsal;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNisn;

@@ -125,7 +125,7 @@ public class Front extends javax.swing.JFrame {
 
     private void masterBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masterBarangActionPerformed
         // TODO add your handling code here:
-        new Barang().setVisible(true);
+        new Admin().setVisible(true);
     }//GEN-LAST:event_masterBarangActionPerformed
 
     private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed

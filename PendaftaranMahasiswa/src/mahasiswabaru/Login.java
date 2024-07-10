@@ -34,16 +34,16 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        bg = new javax.swing.JPanel();
         labelUname = new javax.swing.JLabel();
         labelPaswd = new javax.swing.JLabel();
         txtUname = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        judul = new javax.swing.JLabel();
         login = new javax.swing.JButton();
         txtPaswd = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        pendaftaran = new javax.swing.JMenuItem();
+        masterPendaftaran = new javax.swing.JMenuItem();
         keluar = new javax.swing.JMenuItem();
         tabel = new javax.swing.JMenu();
         mahasiswa = new javax.swing.JMenuItem();
@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Goudy Old Style", 1, 36)); // NOI18N
         jLabel1.setText("Halo Admin");
 
-        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+        bg.setBackground(new java.awt.Color(102, 255, 255));
 
         labelUname.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         labelUname.setText("Username");
@@ -63,8 +63,8 @@ public class Login extends javax.swing.JFrame {
         labelPaswd.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         labelPaswd.setText("Password");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel2.setText("Silahkan Login");
+        judul.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        judul.setText("Silahkan Login");
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -73,40 +73,40 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelPaswd)
                             .addComponent(labelUname))
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUname, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                             .addComponent(txtPaswd)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(judul))
+                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(login)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel2)
+                .addComponent(judul)
                 .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelUname)
                     .addComponent(txtUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPaswd)
                     .addComponent(txtPaswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
@@ -116,13 +116,13 @@ public class Login extends javax.swing.JFrame {
 
         jMenu1.setText("Menu");
 
-        pendaftaran.setText("Pendaftaran");
-        pendaftaran.addActionListener(new java.awt.event.ActionListener() {
+        masterPendaftaran.setText("Admin Pendaftaran Mahasiswa Baru");
+        masterPendaftaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendaftaranActionPerformed(evt);
+                masterPendaftaranActionPerformed(evt);
             }
         });
-        jMenu1.add(pendaftaran);
+        jMenu1.add(masterPendaftaran);
 
         keluar.setText("Keluar");
         keluar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(222, 222, 222)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,17 +184,17 @@ public class Login extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendaftaranActionPerformed
+    private void masterPendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masterPendaftaranActionPerformed
         // TODO add your handling code here:
-        new Main().setVisible(true);
-    }//GEN-LAST:event_pendaftaranActionPerformed
+        new Admin().setVisible(true);
+    }//GEN-LAST:event_masterPendaftaranActionPerformed
 
     private void keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarActionPerformed
         // TODO add your handling code here:
@@ -209,13 +209,15 @@ public class Login extends javax.swing.JFrame {
         if (count == 0) {
             JOptionPane.showMessageDialog(null, "User tidak ditemukan");
         } else {
-            pendaftaran.setEnabled(true);
+            masterPendaftaran.setEnabled(true);
             tabel.setEnabled(true);
             txtUname.setVisible(false);
             txtPaswd.setVisible(false);
             labelUname.setVisible(false);
             labelPaswd.setVisible(false);
             login.setVisible(false);
+            bg.setVisible(false);
+            judul.setVisible(false);
         }
     }//GEN-LAST:event_loginActionPerformed
 
@@ -271,17 +273,17 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem asal;
+    private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel judul;
     private javax.swing.JMenuItem keluar;
     private javax.swing.JLabel labelPaswd;
     private javax.swing.JLabel labelUname;
     private javax.swing.JButton login;
     private javax.swing.JMenuItem mahasiswa;
-    private javax.swing.JMenuItem pendaftaran;
+    private javax.swing.JMenuItem masterPendaftaran;
     private javax.swing.JMenuItem prodi;
     private javax.swing.JMenu tabel;
     private javax.swing.JPasswordField txtPaswd;

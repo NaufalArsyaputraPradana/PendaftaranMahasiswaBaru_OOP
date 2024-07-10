@@ -4,11 +4,29 @@
  */
 package mahasiswabaru;
 
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import mahasiswabaru.Formulir;
+
 /**
  *
  * @author HP
  */
 public class Prodi extends javax.swing.JFrame {
+
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/mahasiswabaru";
+    static final String USER = "root";
+    static final String PASS = "";
+
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
+
+    private javax.swing.JTextField txtProdi;
+    private javax.swing.JTextField txtNisn;
+
+    Formulir data = new Formulir();
 
     /**
      * Creates new form prodi
@@ -26,13 +44,9 @@ public class Prodi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTambah = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnHapus = new javax.swing.JButton();
-        btnKeluar = new javax.swing.JButton();
         judul = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMhs = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -41,38 +55,10 @@ public class Prodi extends javax.swing.JFrame {
             }
         });
 
-        btnTambah.setText("Tambah");
-        btnTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahActionPerformed(evt);
-            }
-        });
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
-        btnHapus.setText("Hapus");
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
-            }
-        });
-
-        btnKeluar.setText("Keluar");
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
-            }
-        });
-
         judul.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         judul.setText("Minat Program Studi");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMhs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -80,50 +66,36 @@ public class Prodi extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nama", "NISN", "Minat Program Studi"
+                "No", "NISN", "Minat Program Studi"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblMhs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tblMhsMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMhs);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(btnTambah)
-                .addGap(85, 85, 85)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(judul)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEdit)
-                        .addGap(92, 92, 92)
-                        .addComponent(btnHapus)
-                        .addGap(78, 78, 78)
-                        .addComponent(btnKeluar)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(judul)
+                        .addGap(217, 217, 217))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(judul)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTambah)
-                    .addComponent(btnEdit)
-                    .addComponent(btnHapus)
-                    .addComponent(btnKeluar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -131,41 +103,52 @@ public class Prodi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHapusActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        showtable();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tblMhsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMhsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tblMhsMouseClicked
 
-    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTambahActionPerformed
+    public void showtable() {
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
+            model.addColumn("NISN");
+            model.addColumn("Minat Program Studi");
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditActionPerformed
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM mhs";
+            int i = 1;
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    i,
+                    rs.getString("nisn"),
+                    rs.getString("prodi"),});
+                i++;
+            }
+            rs.close();
+            conn.close();
+            stmt.close();
 
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnKeluarActionPerformed
-
+            tblMhs.setModel(model);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btnKeluar;
-    private javax.swing.JButton btnTambah;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel judul;
+    private javax.swing.JTable tblMhs;
     // End of variables declaration//GEN-END:variables
 }

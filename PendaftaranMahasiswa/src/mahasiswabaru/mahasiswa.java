@@ -6,7 +6,6 @@ package mahasiswabaru;
 
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
-
 import mahasiswabaru.Formulir;
 
 /**
@@ -26,18 +25,14 @@ public class Mahasiswa extends javax.swing.JFrame {
 
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNisn;
-    private Formulir data;
+
+    Formulir data = new Formulir();
 
     /**
      * Creates new form mahasiswa
      */
     public Mahasiswa() {
         initComponents();
-
-        data = new Formulir();
-
-        txtNama.setText(data.getNama());
-        txtNisn.setText(String.valueOf(data.getNisn()));
     }
 
     /**
@@ -52,7 +47,6 @@ public class Mahasiswa extends javax.swing.JFrame {
         judul = new javax.swing.JLabel();
         tabel = new javax.swing.JScrollPane();
         tblMhs = new javax.swing.JTable();
-        btnHapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -66,13 +60,13 @@ public class Mahasiswa extends javax.swing.JFrame {
 
         tblMhs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nama", "NISN"
+                "No", "Nama", "NISN"
             }
         ));
         tblMhs.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -81,13 +75,6 @@ public class Mahasiswa extends javax.swing.JFrame {
             }
         });
         tabel.setViewportView(tblMhs);
-
-        btnHapus.setText("Hapus");
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,9 +87,7 @@ public class Mahasiswa extends javax.swing.JFrame {
                         .addComponent(judul)
                         .addGap(253, 253, 253))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnHapus)
-                            .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
@@ -111,43 +96,12 @@ public class Mahasiswa extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(judul)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnHapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-
-        String nama = data.getNama().toString().trim();
-
-        try {
-            Class.forName(JDBC_DRIVER);
-
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            stmt = conn.createStatement();
-
-            String sql = "DELETE FROM mhs WHERE id_mhs=?";
-
-            PreparedStatement pms = conn.prepareStatement(sql);
-            pms.setString(1, nama);
-
-            pms.execute();
-
-            stmt.close();
-            conn.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        showtable();
-    }//GEN-LAST:event_btnHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:\
@@ -156,20 +110,15 @@ public class Mahasiswa extends javax.swing.JFrame {
 
     private void tblMhsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMhsMouseClicked
         // TODO add your handling code here:
-        getData();
-    }//GEN-LAST:event_tblMhsMouseClicked
 
-    public void getData() {
-        int baris = tblMhs.getSelectedRow();
-        txtNama.setText(String.valueOf(tblMhs.getValueAt(baris, 1)));
-        txtNisn.setText(String.valueOf(tblMhs.getValueAt(baris, 2)));
-    }
+    }//GEN-LAST:event_tblMhsMouseClicked
 
     public void showtable() {
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nama");
             model.addColumn("NISN");
 
@@ -180,7 +129,6 @@ public class Mahasiswa extends javax.swing.JFrame {
             while (rs.next()) {
                 model.addRow(new Object[]{
                     i,
-                    rs.getString("id_mhs"),
                     rs.getString("nama"),
                     rs.getString("nisn"),});
                 i++;
@@ -200,7 +148,6 @@ public class Mahasiswa extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHapus;
     private javax.swing.JLabel judul;
     private javax.swing.JScrollPane tabel;
     private javax.swing.JTable tblMhs;
