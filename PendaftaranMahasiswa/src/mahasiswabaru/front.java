@@ -4,17 +4,25 @@
  */
 package mahasiswabaru;
 
+import javax.swing.JOptionPane;
+import models.Users;
+
 /**
  *
- * @author Naufal Arsyaputra Pradana
+ * @author 
  */
-public class front extends javax.swing.JFrame {
+public class Front extends javax.swing.JFrame {
 
+    Users user = new Users();
     /**
-     * Creates new form front
+     * Creates new form Front
      */
-    public front() {
+    public Front() { 
         initComponents();
+        masterBarang.setEnabled(false);
+        jMenu2.setEnabled(false);
+        jMenu3.setEnabled(false);
+       
     }
 
     /**
@@ -26,129 +34,55 @@ public class front extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDaftar = new javax.swing.JButton();
-        Judul = new javax.swing.JLabel();
-        menuBar = new javax.swing.JMenuBar();
-        btnMenu = new javax.swing.JMenu();
-        btnMhs = new javax.swing.JMenuItem();
-        btnAsal = new javax.swing.JMenuItem();
-        BtnProdi = new javax.swing.JMenuItem();
-        btnKeluar = new javax.swing.JMenu();
+        labelUname = new javax.swing.JLabel();
+        txtUname = new javax.swing.JTextField();
+        labelPaswd = new javax.swing.JLabel();
+        txtPaswd = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        masterBarang = new javax.swing.JMenuItem();
+        menuExit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnDaftar.setText("Daftar Kuliah");
-        btnDaftar.addActionListener(new java.awt.event.ActionListener() {
+        labelUname.setText("Username");
+
+        labelPaswd.setText("Password");
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDaftarActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
-        Judul.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Judul.setText("Pendaftaran Mahasiswa Baru");
-
-        btnMenu.setText("Menu");
-
-        btnMhs.setText("Tabel Mahasiswa");
-        btnMhs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMhsActionPerformed(evt);
-            }
-        });
-        btnMenu.add(btnMhs);
-
-        btnAsal.setText("Tabel Asal Sekolah");
-        btnAsal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsalActionPerformed(evt);
-            }
-        });
-        btnMenu.add(btnAsal);
-
-        BtnProdi.setText("Tabel Program Studi");
-        BtnProdi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnProdiActionPerformed(evt);
-            }
-        });
-        btnMenu.add(BtnProdi);
-
-        menuBar.add(btnMenu);
-
-        btnKeluar.setText("Keluar");
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
-            }
-        });
-        menuBar.add(btnKeluar);
-
-        setJMenuBar(menuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Judul)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnDaftar)))
-                .addGap(146, 146, 146))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(Judul)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDaftar)
-                .addContainerGap(131, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-     private void initComponents() {
-
-        
         jMenu1.setText("File");
 
-        jTutup.setText("Exit");
-        jTutup.addActionListener(new java.awt.event.ActionListener() {
+        masterBarang.setText("Master Barang");
+        masterBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTutupActionPerformed(evt);
+                masterBarangActionPerformed(evt);
             }
         });
-        jMenu1.add(jTutup);
+        jMenu1.add(masterBarang);
+
+        menuExit.setText("Keluar");
+        menuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuExit);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Pendaftaran");
-
-        pendaftaran.setText("Pendaftaran Mahasiswa");
-        pendaftaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendaftaranActionPerformed(evt);
-            }
-        });
-        jMenu2.add(pendaftaran);
-
+        jMenu2.setText("Transaksi");
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Data");
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Data Mahasiswa");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jCheckBoxMenuItem1);
-
+        jMenu3.setText("Laporan");
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -157,35 +91,67 @@ public class front extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelUname)
+                    .addComponent(labelPaswd))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogin)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtUname)
+                        .addComponent(txtPaswd, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelUname)
+                    .addComponent(txtUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPaswd)
+                    .addComponent(txtPaswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(btnLogin)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
-    }
-    
-    private void btnDaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDaftarActionPerformed
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnProdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProdiActionPerformed
+    private void masterBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masterBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnProdiActionPerformed
+        new Barang();
+    }//GEN-LAST:event_masterBarangActionPerformed
 
-    private void btnMhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMhsActionPerformed
+    private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMhsActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuExitActionPerformed
 
-    private void btnAsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsalActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAsalActionPerformed
-
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnKeluarActionPerformed
+        String uname = txtUname.getText();
+        String paswd = String.valueOf(txtPaswd.getPassword());
+        int count = user.checkUser(uname, paswd);
+        if(count == 0){
+            JOptionPane.showMessageDialog(null,"User tidak ditemukan");
+        }
+        else{
+            masterBarang.setEnabled(true);
+            jMenu2.setEnabled(true);
+            jMenu3.setEnabled(true);
+            txtUname.setVisible(false);
+            txtPaswd.setVisible(false);
+            labelUname.setVisible(false);
+            labelPaswd.setVisible(false);
+            btnLogin.setVisible(false);
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,32 +170,35 @@ public class front extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new front().setVisible(true);
+                new Front().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem BtnProdi;
-    private javax.swing.JLabel Judul;
-    private javax.swing.JMenuItem btnAsal;
-    private javax.swing.JButton btnDaftar;
-    private javax.swing.JMenu btnKeluar;
-    private javax.swing.JMenu btnMenu;
-    private javax.swing.JMenuItem btnMhs;
-    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel labelPaswd;
+    private javax.swing.JLabel labelUname;
+    private javax.swing.JMenuItem masterBarang;
+    private javax.swing.JMenuItem menuExit;
+    private javax.swing.JPasswordField txtPaswd;
+    private javax.swing.JTextField txtUname;
     // End of variables declaration//GEN-END:variables
 }
