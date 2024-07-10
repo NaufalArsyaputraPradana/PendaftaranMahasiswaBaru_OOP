@@ -149,6 +149,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNama">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNamaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNisn">
         </Component>
